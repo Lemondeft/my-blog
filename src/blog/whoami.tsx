@@ -29,7 +29,7 @@ const qna: QnA[] = [
   },
   {
     question: "what about your journey in coding?",
-    answer: "in mid or early 2023, i code my first code with Python printing 'hello world'. then i learn HTML and CSS, and i made my first portfolio ish in mid 2024. i think i suited for frontend development because i think i like it so when i graduated from middle school in mid 2024, i decided to enroll into vocational highschool to pursue that. and now here i am, learning React and TypeScript, and i want to learn more about backend and mobile development in the future.",
+    answer: "in mid or early 2023, i code my first code with Python printing 'hello world'. then i learn HTML and CSS, and i made my first portfolio ish in mid 2024. i think i suited for frontend development because i think i like it so when i graduated from middle school in mid 2025, i decided to enroll into vocational highschool to pursue that. and now here i am, learning React and TypeScript, and i want to learn more about backend and mobile development in the future.",
   }
 ]
 
@@ -48,12 +48,12 @@ export default function Whoami() {
         <h1 className="text-4xl font-bold mt-8">$whoami?<span className="caret">_</span></h1>
         <p className="text-white/70 mt-4 font-light">a brief introduction to me, myself.</p>
         <div className="border border-white/20 rounded-xl p-6 mt-8 bg-black/40 backdrop-blur">
-  <p className="text-white/50 font-mono">// identity</p>
-  <h2 className="text-2xl font-bold mt-2">Lemondeft</h2>
-  <p className="text-white/70 mt-2">
-    CS student · Linux user · Sci-fi reader · tinkerer
-  </p>
-</div>
+        <p className="text-white/50 font-mono">// identity</p>
+        <h2 className="text-2xl font-bold mt-2">Lemondeft</h2>
+        <p className="text-white/70 mt-2">
+            CS student · Linux user · Sci-fi reader · tinkerer
+        </p>
+        </div>
         <div className="flex flex-col gap-8 mt-12">
           {qna.map((item) => (
             <div key={item.question} className="p-6 border-b border-white/10 last:border-none">
