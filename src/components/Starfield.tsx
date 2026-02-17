@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo } from "react"
 
 interface Star {
   top: string
@@ -6,43 +6,53 @@ interface Star {
   size: string
   opacity: number
   color: string
+  delay: string
+  duration: string
 }
 
 export default function Starfield() {
-  const stars = useMemo(() => {
-    const colors = [
-      '#ffffff',
-      '#a78bfa', // purple
-      '#93c5fd', // blue
-      '#c4b5fd', // light purple
-      '#e0f2fe', // ice white
-    ]
+  const layers = [100, 70, 40]
 
-    return Array.from({ length: 150 }, (): Star => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      size: `${Math.random() * 2 + 1}px`,
-      opacity: Math.random() * 0.7 + 0.3,
-      color: colors[Math.floor(Math.random() * colors.length)],
-    }))
+  const colors = ["#ffffff", "#93c5fd", "#a78bfa", "#e0f2fe"]
+
+  const starLayers = useMemo(() => {
+    return layers.map(count =>
+      Array.from({ length: count }, (): Star => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        size: `${Math.random() * 2 + 0.5}px`,
+        opacity: Math.random() * 0.7 + 0.3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        delay: `${Math.random() * 5}s`,
+        duration: `${Math.random() * 3 + 2}s`,
+      }))
+    )
   }, [])
 
   return (
-    <div className="fixed inset-0 overflow-hidden" style={{ zIndex: 0 }}>
-      {stars.map((star, i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            borderRadius: '50%',
-            backgroundColor: star.color,
-            opacity: star.opacity,
-          }}
-        />
+    <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none">
+      {starLayers.map((stars, layer) => (
+       <div
+  key={layer}
+  className="absolute inset-0"
+  style={{ animation: `drift${layer} 60s linear infinite` }}>
+          {stars.map((star, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full blur-[0.5px]"
+              style={{
+                top: star.top,
+                left: star.left,
+                width: star.size,
+                height: star.size,
+                backgroundColor: star.color,
+                opacity: star.opacity,
+                animation: `twinkle ${star.duration} ease-in-out ${star.delay} infinite alternate`,
+                boxShadow: `0 0 6px ${star.color}`,
+              }}
+            />
+          ))}
+        </div>
       ))}
     </div>
   )
