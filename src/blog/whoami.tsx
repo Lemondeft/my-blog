@@ -9,27 +9,23 @@ type QnA = {
 const qna: QnA[] = [
   {
     question: "who are you?",
-    answer: "i'm Lemondeft or AR, a student at a vocational highschool in Indonesia taking CS or RPL some people might say. i tinker with linux, code stuff for fun, and occasionally touch grass.",
+    answer: "I'm Lemondeft (AR), a vocational high school CS student in Indonesia. I focus on Linux, frontend development, and experimenting with systems and code.",
   },
   {
     question: "what do you use?",
-    answer: "Fedora Linux with Hyprland. i mostly write React and TypeScript, learning Python on the side.",
-  },
-  {
-    question: "what do you do for fun?",
-    answer: "read sci-fi novels, watch anime, play War Thunder and Reverse 1999.",
+    answer: "Fedora Linux with Hyprland. Mostly React and TypeScript, currently learning Python and PHP.",
   },
   {
     question: "why this blog?",
-    answer: "mostly to document my own tinkering. if it helps someone else, great. if not, at least i have notes. Or in the near future when i forget everything, i can just read this blog again. also, i want to practice writing and sharing my thoughts in a more public way.",
+    answer: "This blog is a technical notebook for my experiments and learning process. Writing helps me understand better and keeps a record of what I break and fix.",
   },
   {
-    question: "your name is weird, why?",
-    answer: "in early 2025 i decided to play Among Us again, and i wanted a new name. im nor in love in lemon or deft. Among Us decide to generate a random name for me which is Lemon-something. and i modified it to Lemondeft because it sounds cooler and it sounds like developer. and i just stick with it since then.",
+    question: "what is Lemondeft?",
+    answer: "A username I adopted in 2025 and use consistently for my projects and online presence.",
   },
   {
-    question: "what about your journey in coding?",
-    answer: "in mid or early 2023, i code my first code with Python printing 'hello world'. then i learn HTML and CSS, and i made my first portfolio ish in mid 2024. i think i suited for frontend development because i think i like it so when i graduated from middle school in mid 2025, i decided to enroll into vocational highschool to pursue that. and now here i am, learning React and TypeScript, and i want to learn more about backend and mobile development in the future.",
+    question: "your coding journey?",
+    answer: "Tinker with Python in 2023 by printing 'Hello, World!', moved to HTML and CSS in 2024, and now building projects with React and TypeScript while exploring backend and sometimes Language Model.",
   }
 ]
 
