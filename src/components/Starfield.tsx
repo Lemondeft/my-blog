@@ -10,9 +10,10 @@ interface Star {
   duration: string
 }
 
+const driftClasses = ["animate-drift-0", "animate-drift-1", "animate-drift-2"]
+
 export default function Starfield() {
   const layers = [100, 70, 40]
-
   const colors = ["#ffffff", "#93c5fd", "#a78bfa", "#e0f2fe"]
 
   const starLayers = useMemo(() => {
@@ -32,10 +33,7 @@ export default function Starfield() {
   return (
     <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none">
       {starLayers.map((stars, layer) => (
-       <div
-  key={layer}
-  className="absolute inset-0"
-  style={{ animation: `drift${layer} 60s linear infinite` }}>
+        <div key={layer} className={`absolute inset-0 ${driftClasses[layer]}`}>
           {stars.map((star, i) => (
             <div
               key={i}

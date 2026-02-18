@@ -1,43 +1,37 @@
 @import "tailwindcss";
 
-* {
-  font-family: 'Orbitron', sans-serif;
+body {
+  font-family: "Orbitron", sans-serif;
 }
 
-@keyframes blink {
+/* caret */
+@keyframes caret-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
 .caret {
-  animation: blink 2s step-end infinite;
+  animation: caret-blink 1.5s steps(1, end) infinite;
 }
 
+/* star twinkle */
 @keyframes twinkle {
   from { opacity: 0.3; }
   to { opacity: 1; }
 }
 
+/* drift layers */
 @keyframes drift0 {
-  from { transform: translateY(0px); }
-  to { transform: translateY(40px); }
+  from { transform: translateY(0); }
+  to   { transform: translateY(40px); }
 }
+
 @keyframes drift1 {
-  from { transform: translateY(0px); }
-  to { transform: translateY(25px); }
+  from { transform: translateY(0); }
+  to   { transform: translateY(25px); }
 }
+
 @keyframes drift2 {
-  from { transform: translateY(0px); }
-  to { transform: translateY(15px); }
-}
-
-.animate-drift-0 { animation: drift0 60s linear infinite; }
-.animate-drift-1 { animation: drift1 90s linear infinite; }
-.animate-drift-2 { animation: drift2 120s linear infinite; }
-
-
-@keyframes shoot {
-  0% { transform: translateX(0) translateY(0); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translateX(-300px) translateY(600px); opacity: 0; }
+  from { transform: translateY(0); }
+  to   { transform: translateY(15px); }
 }
