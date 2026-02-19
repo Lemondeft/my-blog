@@ -14,6 +14,26 @@ body {
   animation: caret-blink 1.5s steps(1, end) infinite;
 }
 
+@keyframes popIn {
+  from {
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.page-enter {
+  animation: popIn 0.4s cubic-bezier(.22,1,.36,1);
+}
+
+.post-card {
+  animation: popIn 0.3s cubic-bezier(.22,1,.36,1);
+  animation-delay: calc(var(--i) * 0.08s);
+}
+
+
+
 /* star twinkle */
 @keyframes twinkle {
   from { opacity: 0.3; }
