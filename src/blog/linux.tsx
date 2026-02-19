@@ -1,49 +1,36 @@
 import { useNavigate } from "react-router-dom"
 import Starfield from "../components/Starfield"
 
-type DocBlock =
-  | { type: "text"; content: string }
-  | { type: "list"; items: string[] }
-  | { type: "code"; content: string }
-  | { type: "note"; content: string }
-
 type Section = {
   title: string
-  blocks: DocBlock[]
+  content: string
 }
 
 const sections: Section[] = [
   {
     title: "Introduction",
-    blocks: [
-      {
-        type: "text",
-        content:
-          "When I first heard about Linux, I was skeptical. I had no idea what the use of it. When my friend first introduced me to it, I was intrigued.",
-      },
-    ],
+    content:
+      "When I first heard about Linux, I was skeptical. I had no idea what the use of it. When my friend first introduced me to it, I was intrigued.",
   },
   {
     title: "Fedora Linux",
-    blocks: [
-      { type: "text", content: "" },
-      { type: "list", items: [] },
-    ],
+    content: "",
   },
   {
     title: "Hyprland",
-    blocks: [
-      { type: "text", content: "" },
-      { type: "list", items: [] },
-    ],
+    content: "",
   },
   {
     title: "System Configuration",
-    blocks: [{ type: "list", items: [] }],
+    content: "",
   },
   {
     title: "Workflow",
-    blocks: [{ type: "text", content: "" }],
+    content: "",
+  },
+  {
+    title: "Notes",
+    content: "",
   },
 ]
 
@@ -82,56 +69,19 @@ export default function Linux() {
           </p>
         </div>
 
-        {/* Content */}
-        <div className="flex flex-col gap-10 mt-12">
-          {sections.map((section, idx) => (
-            <div key={idx} className="p-6 border-b border-white/10 last:border-none">
-              <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
-
-              <div className="space-y-4">
-                {section.blocks.map((block, i) => {
-                  if (block.type === "text") {
-                    return (
-                      <p
-                        key={i}
-                        className="text-white/80 font-light text-lg leading-relaxed max-w-3xl"
-                      >
-                        {block.content || " "}
-                      </p>
-                    )
-                  }
-
-                  if (block.type === "list") {
-                    return (
-                      <ul
-                        key={i}
-                        className="list-disc list-inside text-white/70 space-y-2"
-                      >
-                        {block.items.length === 0 ? (
-                          <li className="text-white/30"> </li>
-                        ) : (
-                          block.items.map((item, j) => (
-                            <li key={j}>{item}</li>
-                          ))
-                        )}
-                      </ul>
-                    )
-                  }
-
-                  if (block.type === "code") {
-                    return (
-                      <pre
-                        key={i}
-                        className="bg-black/60 border border-white/10 rounded-lg p-4 text-sm overflow-x-auto"
-                      >
-                        <code>{block.content}</code>
-                      </pre>
-                    )
-                  }
-
-                  return null
-                })}
-              </div>
+        {/* Sections */}
+        <div className="flex flex-col gap-8 mt-12">
+          {sections.map((item) => (
+            <div
+              key={item.title}
+              className="p-6 border-b border-white/10 last:border-none"
+            >
+              <h2 className="text-white text-2xl font-bold mb-2">
+                {item.title}
+              </h2>
+              <p className="text-white/80 font-light text-lg leading-relaxed">
+                {item.content || " "}
+              </p>
             </div>
           ))}
         </div>
