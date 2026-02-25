@@ -41,7 +41,7 @@ export default function Whoami() {
           className="px-4 py-2 border border-white/20 rounded hover:border-white/60 transition-all duration-300 hover:scale-[1.1] hover:shadow-[0_0_20px_rgba(100,200,255,0.1)]">
           ← back
         </button>
-        <h1 className="text-4xl font-bold mt-8">$whoami?<span className="caret">_</span></h1>
+        <h1 className="text-4xl font-bold mt-8">$ whoami<span className="caret">_</span></h1>
         <p className="text-white/70 mt-4 font-light">a brief introduction to me, myself.</p>
         <div className="border border-white/20 rounded-xl p-6 mt-8 bg-black/40 backdrop-blur">
         <p className="text-white/50 font-mono">// identity</p>

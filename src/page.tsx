@@ -69,8 +69,7 @@ export default function Home() {
             <button
               key={opt}
               onClick={() => setSortOption(opt)}
-              className={baseClass + (sortOption === opt ? " text-white" : " text-white/40")}
-            >
+              className={baseClass + (sortOption === opt ? " text-white" : " text-white/40")}>
               {opt === "date-desc" ? "Newest" : opt === "date-asc" ? "Oldest" : "Title"}
             </button>
           ))}
@@ -81,8 +80,7 @@ export default function Home() {
             <div
               key={post.slug}
               onClick={() => navigate(`/blog/${post.slug}`)}
-              className="post-card border border-white/20 rounded-lg p-6 hover:border-white/60 hover:shadow-[0_0_20px_rgba(100,200,255,0.1)] transition-colors cursor-pointer hover:scale-[1.01] duration-300"
-            >
+              className="post-card border border-white/20 rounded-lg p-6 hover:border-white/60 hover:shadow-[0_0_20px_rgba(100,200,255,0.1)] transition-colors cursor-pointer hover:scale-[1.01] duration-300">
               <p className="text-white/40 text-sm">{post.date}</p>
               <h3 className="text-white text-xl font-bold mt-1">{post.title}</h3>
               <p className="text-white/70 mt-2 font-light">{post.excerpt}</p>
