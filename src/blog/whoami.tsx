@@ -1,6 +1,38 @@
 import { useNavigate } from "react-router-dom"
 import Starfield from "../components/Starfield"
 
+type Skill = {
+  name: string
+  color: string
+  logo: string
+}
+
+const skillGroups: { label: string; skills: Skill[] }[] = [
+  {
+    label: "// frontend",
+    skills: [
+      { name: "React", color: "61DAFB", logo: "react" },
+      { name: "TypeScript", color: "3178C6", logo: "typescript" },
+      { name: "Tailwind CSS", color: "06B6D4", logo: "tailwindcss" },
+    ],
+  },
+  {
+    label: "// learning",
+    skills: [
+      { name: "Python", color: "3776AB", logo: "python" },
+      { name: "MySQL", color: "4479A1", logo: "mysql" },
+      { name: "PHP", color: "777BB4", logo: "php" },
+    ],
+  },
+  {
+    label: "// environment",
+    skills: [
+      { name: "Fedora", color: "51A2DA", logo: "fedora" },
+      { name: "Hyprland", color: "58E1FF", logo: "linux" },
+    ],
+  },
+]
+
 type QnA = {
   question: string
   answer: string
@@ -49,6 +81,26 @@ export default function Whoami() {
         <p className="text-white/70 mt-2">
             CS student · Linux user · Sci-fi reader · tinkerer
         </p>
+        </div>
+        <div className="flex flex-col gap-4 mt-12">
+          <p className="text-white/40 text-lg font-bold p-6">// stack</p>
+          <div className="flex flex-col">
+            {skillGroups.map((group) => (
+              <div key={group.label} className="p-6 border-b border-white/10 last:border-none">
+                <p className="text-white/40 text-lg font-bold mb-2">{group.label}</p>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <img
+                      key={skill.name}
+                      src={`https://img.shields.io/badge/${skill.name}-${skill.color}?style=for-the-badge&logo=${skill.logo}&logoColor=white`}
+                      alt={skill.name}
+                      className="h-7 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-200"
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col gap-8 mt-12">
           {qna.map((item) => (
