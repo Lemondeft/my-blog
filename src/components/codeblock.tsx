@@ -11,7 +11,7 @@ export default function CodeBlock({ filename, language, snippet }: CodeBlockProp
   const copyToClipboard = () => navigator.clipboard.writeText(snippet)
 
   return (
-    <div className="mt-4 rounded-xl overflow-hidden bg-white/5 backdrop-blur-[3px] border border-white/30 hover:bg-zinc-950 hover:backdrop-blur-0 transition-all duration-300">
+    <div className="mt-4 rounded-xl overflow-hidden bg-white/5 backdrop-blur-[3px] border border-white/30 hover:bg-neutral-900 hover:backdrop-blur-0 hover:border-zinc-500 transition-all duration-300">
       
       {/* Header with filename and copy button */}
       <div className="px-4 py-2 border-b border-white/10 flex justify-between items-center bg-white/5">
