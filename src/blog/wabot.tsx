@@ -37,7 +37,7 @@ const sections: Section[] = [
   },
   {
     title: "Getting Started",
-    content: "You'll need to install the required dependencies: @whiskeysockets/baileys for WhatsApp integration, qrcode-terminal for authentication, and @hapi/boom for error handling. The bot connects to an AI service through the OpenRouter proxy API instead of using a vendor-specific SDK. The complete code including ai.ts and history.ts modules can be found on github.com/lemondeft/wa-bot. Make sure to configure your OpenRouter API key in environment variables.",
+    content: "You'll need to install the required dependencies: @whiskeysockets/baileys for WhatsApp integration, qrcode-terminal for authentication, and @hapi/boom for error handling. For me the bot connects to an AI service through the OpenRouter proxy API instead of using a vendor-specific SDK. The complete code including ai.ts and history.ts modules can be found on github.com/lemondeft/wa-bot. Make sure to configure your OpenRouter API key in environment variables.",
     code: {
       filename: "terminal",
       language: "bash",
