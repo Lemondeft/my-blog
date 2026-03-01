@@ -280,7 +280,7 @@ export default function Wabot() {
           Documentation of my WhatsApp bot project using Baileys, a Socket-based TS/JavaScript API for WhatsApp.
         </p>
 
-        <div className="border border-white/20 rounded-xl p-6 mt-8 bg-black/40 backdrop-blur">
+        <div className="border border-white/20 rounded-xl p-6 mt-8 bg-black/20">
           <p className="text-white/50 font-mono">// Baileys</p>
           <h2 className="text-2xl font-bold mt-2">TypeScript · Baileys · Node.js</h2>
           <p className="text-white/70 mt-2">Building a WhatsApp bot</p>
