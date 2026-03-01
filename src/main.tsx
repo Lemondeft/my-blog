@@ -5,6 +5,7 @@ import './index.css'
 import Home from './page.tsx'
 import Whoami from './blog/whoami.tsx'
 import Linux from './blog/linux.tsx'
+import Wabot from './blog/wabot.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<Home />} />
         <Route path="/blog/whoami" element={<Whoami />} />
         <Route path="/blog/linux" element={<Linux />} />
+        <Route path="/blog/wabot" element={<Wabot />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -29,11 +29,11 @@ const posts: Post[] = [
     tags: ["linux", "hyprland"],
   },
   {
-    slug: "test1",
-    title: "Some Testing",
+    slug: "wabot",
+    title: "WhatsApp AI Bot",
     date:"2026-02-17",
-    excerpt: "Some alien things that i do some time ago.",
-    tags: ["reverse", "1999"]
+    excerpt: "A WhatsApp bot Baileys based Socket-based TS/JavaScript API for WhatsApp",
+    tags: ["baileys", "whatsapp", "bot"],
   },
 ]
 
