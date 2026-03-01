@@ -51,7 +51,7 @@ npm install dotenv`
     title: "Project Setup",
     content: "The bot uses multi-file auth state to persist login sessions, so you don't need to scan QR code every time you restart.",
     code: {
-      filename: "setup-connection.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `const { state, saveCreds } = await useMultiFileAuthState('auth_info')
 const { version } = await fetchLatestBaileysVersion()
@@ -70,7 +70,7 @@ sock.ev.on('creds.update', saveCreds)`
     title: "QR Code Authentication",
     content: "When you first run the bot, it generates a QR code in the terminal that you scan with your WhatsApp to authenticate. Once connected, it stays logged in using the saved credentials. If the connection drops, it automatically reconnects after 5 seconds.",
     code: {
-      filename: "handle-auth.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `sock.ev.on('connection.update', ({ connection, lastDisconnect, qr }) => {
   if (qr) qrcode.generate(qr, { small: true })
@@ -89,7 +89,7 @@ sock.ev.on('creds.update', saveCreds)`
     title: "Message Processing",
     content: "The bot listens for incoming messages and processes them. It filters out messages that don't start with !ai or !clear commands. I added duplicate message detection to prevent processing the same message twice.",
     code: {
-      filename: "process-messages.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `const seen = new Set<string>()
 const rateLimits = new Map<string, number>()
@@ -116,7 +116,7 @@ sock.ev.process(async (events) => {
     title: "Rate Limiting",
     content: "To prevent spam and API overuse, I implemented a 3-second cooldown per user. If someone tries to use the bot too quickly, it tells them how long to wait.",
     code: {
-      filename: "apply-rate-limit.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `const userId = msg.key.participant || jid
 const lastCall = rateLimits.get(userId) || 0
@@ -139,7 +139,7 @@ rateLimits.set(userId, now)`
     title: "AI Integration",
     content: "The bot sends user prompts to an AI model through the OpenRouter proxy API. Conversation history is maintained per chat so the AI can respond with contextual awareness across multiple messages. A system prompt is injected to simulate casual human texting behavior, including informal tone, contractions, and language adaptation based on the user's input language. The proxy approach allows the AI backend model to be changed without modifying the main bot logic.",
     code: {
-      filename: "handle-ai-response.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `if (text === '!clear') {
   clearHistory(jid)
@@ -160,7 +160,7 @@ appendHistory(jid, 'assistant', reply)`
     title: "Smart Message Chunking",
     content: "Long messages are split into chunks at sentence boundaries to maintain readability. This ensures messages don't get cut off mid-sentence.",
     code: {
-      filename: "split-messages.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `function splitIntoChunks(text: string, maxSize = 150): string[] {
   const sentences = text.match(/[^.!?\\n]+[.!?\\n]*/g) ?? [text]
@@ -185,7 +185,7 @@ appendHistory(jid, 'assistant', reply)`
     title: "Human-like Typing Simulation",
     content: "To make the bot feel more natural, I implemented realistic typing behavior with variable delays, jitter for randomness, and pauses between chunks. The bot shows 'typing...' indicator before each message.",
     code: {
-      filename: "simulate-typing.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `async function sendWithTypingAndQuote(
   sock: any,
@@ -225,7 +225,7 @@ appendHistory(jid, 'assistant', reply)`
     title: "Group Chat Support",
     content: "The bot works in both direct messages and group chats. In groups, it detects who sent the message and logs it accordingly. The rate limiting is per-user, not per-chat.",
     code: {
-      filename: "detect-chat-type.ts",
+      filename: "wa.ts",
       language: "typescript",
       snippet: `const isGroup = jid?.endsWith('@g.us')
 const sender = isGroup 
