@@ -37,7 +37,6 @@ export default function CodeBlock({ filename, language, snippet }: CodeBlockProp
           background: 'transparent', // allow blur to show through
           fontSize: '0.875rem',
         }}
-        showLineNumbers
       >
         {snippet}
       </SyntaxHighlighter>
