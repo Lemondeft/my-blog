@@ -409,10 +409,11 @@ console.log(\`[\${chatType}] BOT \${reply.slice(0, 50)}...\`)`,
     title: "Features",
     content: (
       <>
-        <strong>Commands:</strong> !ai &lt;message&gt; to chat with AI, !img
+        Commands: !ai &lt;message&gt; to chat with AI, !img
         &lt;description&gt; to generate images, !clear to reset conversation
-        history
+        history, !reveal to capture view-once media, and !sticker to create stickers from images.
         <br />
+        • AI conversations with context history and system prompt for natural tone
         <br />
         • Supports text messages and captions from images/videos
         <br />
@@ -427,7 +428,12 @@ console.log(\`[\${chatType}] BOT \${reply.slice(0, 50)}...\`)`,
         • Works in both DMs and group chats
         <br />
         • Per-user rate limiting (3 second cooldown)
-        <br />• Image generation with dual format support (base64/URL)
+        <br />
+        • Image generation with dual format support (base64/URL)
+        <br />
+        • View-once media capture with multiple download strategies and MIME type detection
+        <br />
+        • Image-to-sticker conversion with proper resizing and formatting
       </>
     ),
   },
