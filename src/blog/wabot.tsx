@@ -360,6 +360,52 @@ console.log(\`[\${chatType}] BOT \${reply.slice(0, 50)}...\`)`,
     },
   },
   {
+    title: "Turning images into sticker with the command of !sticker.",
+    content: "Users can send an image with the caption !sticker or reply to an image with !sticker, and the bot will convert it into a WhatsApp sticker format and send it back.",
+    code: {
+        filename: "wa.ts",
+        language: "typescript",
+        snippet: `async function handleSticker(sock: any, jid: string, msg: proto.IWebMessageInfo, tag: string, sender: string) {
+    const contextInfo = msg.message?.extendedTextMessage?.contextInfo
+    const quoteMsg = contextInfo?.quotedMessage
+    const imageMsg = quoteMsg?.imageMessage || msg.message?.imageMessage
+
+    if (!imageMsg) {
+        await sock.sendMessage(jid, { text: 'Please send an image with a caption "!sticker" or reply to an image with "!sticker"' }, { quoted: msg })
+        return
+    }
+
+    console.log(\`[\${tag}] \${sender} !sticker\`)
+
+    try {
+        const quotedKey = {
+            remoteJid: contextInfo?.remoteJid || jid,
+            id: contextInfo?.stanzaId,
+            participant: contextInfo?.participant
+        }
+        const mediaSource = quoteMsg
+            ? { message: quoteMsg, key: quotedKey.id ? quotedKey : msg.key }
+            : msg
+        const buffer = await downloadMediaMessage(
+            mediaSource as any, 'buffer', {},
+            { logger: silentLogger, reuploadRequest: sock.updateMediaMessage }
+        )
+
+        const webpBuffer = await sharp(buffer as Buffer)
+            .resize(512, 512, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+            .webp({ quality: 80 })
+            .toBuffer()
+
+        await sock.sendMessage(jid, { sticker: webpBuffer }, { quoted: msg })
+        console.log(\`[\${tag}] \${sender} sticker sent\`)
+    } catch (err: any) {
+        console.error(\`[\${tag}] Sticker creation failed:\`, err?.message)
+        await sock.sendMessage(jid, { text: 'Failed to create sticker: ' + err?.message }, { quoted: msg })
+    }
+}`,
+    },
+},
+  {
     title: "Features",
     content: (
       <>
