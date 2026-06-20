@@ -9,7 +9,7 @@ type Skill = {
 
 const skillGroups: { label: string; skills: Skill[] }[] = [
   {
-    label: "// frontend",
+    label: "Frontend",
     skills: [
       { name: "React", color: "61DAFB", logo: "react" },
       { name: "TypeScript", color: "3178C6", logo: "typescript" },
@@ -17,7 +17,7 @@ const skillGroups: { label: string; skills: Skill[] }[] = [
     ],
   },
   {
-    label: "// learning",
+    label: "Learning",
     skills: [
       { name: "Python", color: "3776AB", logo: "python" },
       { name: "MySQL", color: "4479A1", logo: "mysql" },
@@ -25,7 +25,7 @@ const skillGroups: { label: string; skills: Skill[] }[] = [
     ],
   },
   {
-    label: "// environment",
+    label: "Environment",
     skills: [
       { name: "Fedora", color: "51A2DA", logo: "fedora" },
       { name: "Hyprland", color: "58E1FF", logo: "linux" },
@@ -83,7 +83,7 @@ export default function Whoami() {
         </p>
         </div>
         <div className="flex flex-col gap-4 mt-12">
-          <p className="text-white/40 text-lg font-bold p-6">// stack</p>
+          <h2 className="text-white text-2xl font-bold p-6">Stack</h2>
           <div className="flex flex-col">
             {skillGroups.map((group) => (
               <div key={group.label} className="p-6 border-b border-white/10 last:border-none">
@@ -105,7 +105,7 @@ export default function Whoami() {
         <div className="flex flex-col gap-8 mt-12">
           {qna.map((item) => (
             <div key={item.question} className="p-6 border-b border-white/10 last:border-none">
-            <p className="text-white/40 text-lg font-bold mb-2">// {item.question}</p>
+            <h2 className="text-white text-2xl font-bold mb-2">{item.question}</h2>
             <p className="text-white/80 font-light text-lg leading-relaxed">{item.answer}</p>
             </div>
           ))}
