@@ -35,6 +35,13 @@ const posts: Post[] = [
     excerpt: "A WhatsApp bot Baileys based Socket-based TS/JavaScript API for WhatsApp",
     tags: ["baileys", "whatsapp", "bot"],
   },
+  {
+    slug: "apple-music",
+    title: "Downloading ALAC Lossless from Apple Music",
+    date: "2026-06-20",
+    excerpt: "Docker-based setup to download lossless ALAC from Apple Music and transfer to phone.",
+    tags: ["apple-music", "docker", "linux"],
+  },
 ]
 
 export default function Home() {
