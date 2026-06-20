@@ -17,7 +17,7 @@ const sections: Section[] = [
   {
     title: "Introduction",
     content:
-      "I wanted lossless music on my phone. Not compressed, not lossy — real ALAC from Apple Music. After a lot of trial and error, I got a Docker-based setup that downloads ALAC tracks directly from Apple Music and transfers them to my phone via MTP.",
+      "I wanted lossless music on my phone. Not compressed, not lossy, real ALAC from Apple Music. After a lot of trial and error, I got a Docker-based setup that downloads ALAC tracks directly from Apple Music and transfers them to my phone via MTP.",
   },
   {
     title: "What is it?",
@@ -72,13 +72,10 @@ docker run --rm --network host \\
       </>
     ),
   },
-  {
-    title: "What I Downloaded",
-    content: "Started with Yorushika albums, then Кино, OFFICIAL HIGE DANDISM, Kaneko Ayano, .Feast, and a bunch of Indonesian indie artists. All in ALAC, ranging from 16-bit/44.1kHz (CD quality) to 24-bit/48kHz (hi-res). Some albums only have hi-res in specific storefronts — Japan storefront usually has the best quality for Japanese artists.",
-  },
+
   {
     title: "What I Learned",
-    content: "How FairPlay DRM works at a high level. Docker networking between containers. Apple Music API storefronts and how catalog varies by region. MTP quirks on Linux. The wrapper's auth token from port 30020 vs the media-user-token from browser cookies — they're different things. And that ALAC at 16-bit/44.1kHz is honestly enough for most use cases.",
+    content: "How FairPlay DRM works at a high level. Docker networking between containers. Apple Music API storefronts and how catalog varies by region. MTP quirks on Linux. The wrapper's auth token from port 30020 vs the media-user-token from browser cookies, they're different things. And that ALAC at 16-bit/44.1kHz is honestly enough for most use cases.",
   },
 ]
 
