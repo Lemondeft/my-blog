@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import Starfield from "../components/Starfield"
 import CodeBlock from "../components/codeblock"
+import type { JSX } from "react/jsx-runtime"
 
 type Section = {
   title: string
