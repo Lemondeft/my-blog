@@ -91,7 +91,7 @@ export default function AppleMusic() {
         style={{ zIndex: 1 }}
       >
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           className="px-4 py-2 border border-white/20 rounded hover:border-white/60 transition-all duration-300 hover:scale-[1.1] hover:shadow-[0_0_20px_rgba(100,200,255,0.1)]"
         >
           ← back
