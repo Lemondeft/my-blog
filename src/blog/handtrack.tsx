@@ -115,6 +115,11 @@ detector = vision.HandLandmarker.create_from_options(options)`,
     content:
       "How MediaPipe hand landmarks work and how to interpret them. Using cv2.convexHull and cv2.polylines for shape drawing. Masking techniques for applying effects to specific regions. How v4l2loopback works for creating virtual webcam devices. That the MediaPipe tasks API is quite different from the old solutions API. And that phone cameras over USB through DroidCam is way better than most laptop webcams.",
   },
+  {
+    title: "Note on camera quality",
+    content:
+      "If you want to try this yourself, use a good camera. Seriously. I spent hours debugging why the tracking was inaccurate and janky, turns out my laptop webcam sensor is just bad. Bad contrast, bad low-light performance, noisy image. MediaPipe needs clear edges and contrast to detect hands reliably. A phone camera through DroidCam over USB gave way better results than any amount of preprocessing I threw at the laptop webcam. If you can, use your phone camera. Also, MediaPipe has a GPU delegate that can speed up inference significantly, but it uses OpenGL ES under the hood and on my NVIDIA laptop it fell back to software rendering (llvmpipe) instead of using the actual GPU. If you're on an AMD GPU or a system where EGL works properly, the GPU delegate is worth trying.",
+  },
 ]
 
 export default function Handtrack() {
