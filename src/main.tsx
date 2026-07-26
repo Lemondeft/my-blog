@@ -7,6 +7,7 @@ import Whoami from './blog/whoami.tsx'
 import Linux from './blog/linux.tsx'
 import Wabot from './blog/wabot.tsx'
 import AppleMusic from './blog/apple-music.tsx'
+import Handtrack from './blog/handtrack.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/blog/linux" element={<Linux />} />
         <Route path="/blog/wabot" element={<Wabot />} />
         <Route path="/blog/apple-music" element={<AppleMusic />} />
+        <Route path="/blog/handtrack" element={<Handtrack />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -42,6 +42,13 @@ const posts: Post[] = [
     excerpt: "Docker-based setup to download lossless ALAC from Apple Music and transfer to phone.",
     tags: ["apple-music", "docker", "linux"],
   },
+  {
+    slug: "handtrack",
+    title: "Fingertip Shape Tracker",
+    date: "2026-07-25",
+    excerpt: "Drawing shapes with your fingers using MediaPipe and OpenCV.",
+    tags: ["python", "mediapipe", "opencv"],
+  },
 ]
 
 export default function Home() {
