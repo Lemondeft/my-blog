@@ -71,7 +71,7 @@ export default function Home() {
       <Starfield />
       <div className="max-w-7xl mx-auto py-8 md:py-16 px-4 relative page-enter" style={{ zIndex: 1 }}>
         <h1 className="text-4xl font-bold text-white">My Blog</h1>
-        <h2 className="text-4xl md:text-7xl font-bold text-white p-6 md:p-9 tracking-widest uppercase">
+        <h2 className="text-2xl md:text-7xl font-bold text-white p-4 md:p-9 tracking-widest uppercase">
           WELCOME TO MY INTERGALACTIC BLOG<span className="caret">_</span>
         </h2>
         <p className="text-white text-lg font-light">
