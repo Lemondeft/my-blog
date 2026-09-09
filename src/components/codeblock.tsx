@@ -28,18 +28,20 @@ export default function CodeBlock({ filename, language, snippet }: CodeBlockProp
       </div>
 
       {/* Syntax highlighter */}
+      <div className="overflow-x-auto">
       <SyntaxHighlighter
         language={language}
         style={vscDarkPlus}
         customStyle={{
           margin: 0,
           padding: '1rem',
-          background: 'transparent', // allow blur to show through
+          background: 'transparent',
           fontSize: '0.875rem',
         }}
       >
         {snippet}
       </SyntaxHighlighter>
+      </div>
     </div>
   )
 }

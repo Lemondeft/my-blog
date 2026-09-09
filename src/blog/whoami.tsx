@@ -67,13 +67,13 @@ export default function Whoami() {
   return (
     <div className="bg-black min-h-screen text-white">
       <Starfield />
-      <div className="max-w-7xl mx-auto py-16 px-4 relative page-enter" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto py-8 md:py-16 px-4 relative page-enter" style={{ zIndex: 1 }}>
         <button
           onClick={() => navigate("/")}
           className="px-4 py-2 border border-white/20 rounded hover:border-white/60 transition-all duration-300 hover:scale-[1.1] hover:shadow-[0_0_20px_rgba(100,200,255,0.1)]">
           ← back
         </button>
-        <h1 className="text-4xl font-bold mt-8">$ whoami<span className="caret">_</span></h1>
+        <h1 className="text-2xl md:text-4xl font-bold mt-8">$ whoami<span className="caret">_</span></h1>
         <p className="text-white/70 mt-4 font-light">a brief introduction to me, myself.</p>
         <div className="border border-white/20 rounded-xl p-6 mt-8 bg-black/20">
         <p className="text-white/50 font-mono">// identity</p>

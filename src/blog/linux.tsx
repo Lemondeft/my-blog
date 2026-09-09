@@ -45,7 +45,7 @@ export default function Linux() {
       <Starfield />
 
       <div
-        className="max-w-7xl mx-auto py-16 px-4 relative page-enter"
+        className="max-w-7xl mx-auto py-8 md:py-16 px-4 relative page-enter"
         style={{ zIndex: 1 }}
       >
         <button
@@ -55,7 +55,7 @@ export default function Linux() {
           ← back
         </button>
 
-        <h1 className="text-4xl font-bold mt-8">
+        <h1 className="text-2xl md:text-4xl font-bold mt-8">
           My Journey Through Linux<span className="caret">_</span>
         </h1>
         <p className="text-white/70 mt-4 font-light">
@@ -82,7 +82,7 @@ export default function Linux() {
               </p>
                 {item.image && (
               <div className="flex justify-center mt-4">
-              <img src={item.image} alt={item.title} className="w-2/3 rounded border border-white/20" />
+              <img src={item.image} alt={item.title} className="w-full md:w-2/3 rounded border border-white/20" />
               </div>
             )}
             </div>

@@ -130,7 +130,7 @@ export default function Handtrack() {
       <Starfield />
 
       <div
-        className="max-w-7xl mx-auto py-16 px-4 relative page-enter"
+        className="max-w-7xl mx-auto py-8 md:py-16 px-4 relative page-enter"
         style={{ zIndex: 1 }}
       >
         <button
@@ -140,7 +140,7 @@ export default function Handtrack() {
           ← back
         </button>
 
-        <h1 className="text-4xl font-bold mt-8">
+        <h1 className="text-2xl md:text-4xl font-bold mt-8">
           Fingertip Shape Tracker<span className="caret">_</span>
         </h1>
         <p className="text-white/70 mt-4 font-light">

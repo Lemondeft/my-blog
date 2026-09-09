@@ -69,16 +69,16 @@ export default function Home() {
   return (
     <div className="bg-black min-h-screen">
       <Starfield />
-      <div className="max-w-7xl mx-auto py-16 px-4 relative page-enter" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto py-8 md:py-16 px-4 relative page-enter" style={{ zIndex: 1 }}>
         <h1 className="text-4xl font-bold text-white">My Blog</h1>
-        <h2 className="text-7xl font-bold text-white p-9 tracking-widest uppercase">
+        <h2 className="text-4xl md:text-7xl font-bold text-white p-6 md:p-9 tracking-widest uppercase">
           WELCOME TO MY INTERGALACTIC BLOG<span className="caret">_</span>
         </h2>
         <p className="text-white text-lg font-light">
           Hi, im Lemondeft and welcome to my intergalactic blog, I wish to share my useless tinkering.
         </p>
 
-        <div className="flex gap-4 mt-6 mb-6">
+        <div className="flex flex-wrap gap-4 mt-6 mb-6">
           {(["date-desc", "date-asc", "title"] as SortOption[]).map((opt) => (
             <button
               key={opt}
@@ -89,7 +89,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="p-9 flex flex-col gap-8">
+        <div className="p-6 md:p-9 flex flex-col gap-8">
           {sortedPosts.map((post) => (
             <div
               key={post.slug}
