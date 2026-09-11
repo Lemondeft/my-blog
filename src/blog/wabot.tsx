@@ -43,20 +43,22 @@ const sections: Section[] = [
   {
     title: "Getting Started",
     content:
-      "You'll need to install the required dependencies: @whiskeysockets/baileys for WhatsApp integration, qrcode-terminal for authentication, and @hapi/boom for error handling. For me the bot connects to an AI service through a proxy API instead of using a vendor-specific SDK. The complete code including ai.ts and history.ts modules can be found on github.com/lemondeft/wa-bot. Make sure to configure your API key in environment variables.",
+      "You'll need to install the required dependencies: @whiskeysockets/baileys for WhatsApp integration, qrcode-terminal for authentication, @hapi/boom for error handling, openai for AI integrations, and sharp for image processing. For me the bot connects to an AI service through OpenRouter (configure your KEY in environment variables) instead of using a vendor-specific SDK. The complete code including ai.ts and history.ts modules can be found on github.com/lemondeft/wa-bot. Make sure to configure your API key in environment variables, and install yt-dlp for media downloads.",
     code: {
       filename: "terminal",
       language: "bash",
       snippet: `npm install @whiskeysockets/baileys
 npm install qrcode-terminal
 npm install @hapi/boom
-npm install dotenv`,
+npm install openai
+npm install dotenv
+npm install sharp`,
     },
   },
   {
     title: "Project Setup",
     content:
-      "The bot uses multi-file auth state to persist login sessions, so you don't need to scan QR code every time you restart.",
+      "The bot uses multi-file auth state to persist login sessions, so you don't need to scan QR code every time you restart. Use patch-package to fix Baileys type versions if needed.",
     code: {
       filename: "wa.ts",
       language: "typescript",
@@ -170,11 +172,11 @@ appendHistory(jid, 'assistant', reply)`,
   {
     title: "Smart Message Chunking",
     content:
-      "Long messages are split into chunks at sentence boundaries to maintain readability. This ensures messages don't get cut off mid-sentence.",
+      "Long messages are split into chunks at sentence boundaries to maintain readability. This ensures messages don't get cut off mid-sentence. The actual wa.ts now uses maxSize=3000 (not 150) with proper sentence boundary splitting.",
     code: {
       filename: "wa.ts",
       language: "typescript",
-      snippet: `function splitIntoChunks(text: string, maxSize = 150): string[] {
+      snippet: `function splitIntoChunks(text: string, maxSize = 3000): string[] {
   const sentences = text.match(/[^.!?\\n]+[.!?\\n]*/g) ?? [text]
   const chunks: string[] = []
   let current = ''
@@ -406,14 +408,105 @@ console.log(\`[\${chatType}] BOT \${reply.slice(0, 50)}...\`)`,
     },
 },
   {
+    title: "OpenRouter Mini Models or in this case I use it for web search tool.",
+    content:
+      "Switched from voidai/github (student rate limits) to OpenRouter free tier: chat model google/gemini-2.0-flash-exp:free with openrouter:web_search tool, image model google/gemini-2.5-flash-image-preview:free via https://openrouter.ai/api/v1/chat/completions, KEY env var, fallback google/gemma-3-4b-it:free. Include code snippet showing callLLM with model and tools.",
+    code: {
+      filename: "ai.ts",
+      language: "typescript",
+      snippet: `const response = await callLLM({ model: 'google/gemini-2.0-flash-exp:free', messages: [{ role: 'user', content: prompt }], tools: [{ type: 'web_search', name: 'openrouter:web_search' }] })`,
+    },
+  },
+  {
+    title: "Per-Chat History & Summarization",
+    content:
+      "Uses history.ts, ./history/*.json per JID, MAX_HISTORY_CHARS 20000, membersCache, !summarize with extraContext, SUMMARIZE_SYSTEM_PROMPT plain-text rules.",
+    code: {
+      filename: "history.ts",
+      language: "typescript",
+      snippet: `const MAX_HISTORY_CHARS = 20000
+function appendHistory(jid, role, text) {
+  const key = jid
+  let entry = historyCache.get(key) || []
+  entry.push({ role, text, timestamp: Date.now() })
+  if (entry.reduce((sum, e) => sum + e.text.length, 0) > MAX_HISTORY_CHARS) {
+    entry = entry.slice(-50)
+  }
+  historyCache.set(key, entry)
+  return entry
+}
+function clearHistory(jid) { historyCache.delete(jid) }
+async function summarizeChat(jid) {
+  const entries = appendHistory(jid, 'system', SUMMARIZE_SYSTEM_PROMPT) || []
+  const context = entries.map(e => e.role + ": " + e.text).join("\\n")
+  return await callLLM({ model: 'google/gemini-1.5-flash', prompt: context })
+}`,
+    },
+  },
+  {
+    title: "Media Downloads (!dl / !dla)",
+    content:
+      "yt.ts, yt-dlp binary install (curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o yt-dlp && chmod +x yt-dlp), bestvideo[height<=720], --merge-output-format mp4, 100MB limit, -doc flag handling.",
+    code: {
+      filename: "yt.ts",
+      language: "typescript",
+      snippet: `const ytDlpPath = path.join(__dirname, 'yt-dlp')
+if (!fs.existsSync(ytDlpPath)) {
+  require('child_process').execSync('curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ' + ytDlpPath + ' && chmod +x ' + ytDlpPath)
+}
+async function downloadMedia(url, doc = false) {
+  const args = ['-F', 'bestvideo[height<=720]+bestaudio', '-o', '/tmp/media']
+  if (doc) args.push('--doc')
+  const proc = require('child_process').spawn(ytDlpPath, [...args, url])
+  return new Promise((resolve) => proc.on('close', (code) => resolve(code === 0 ? '/tmp/media.mp4' : null)))
+}`,
+    },
+  },
+  {
+    title: "View-Once Reveal Improvements",
+    content:
+      "normalizeMsgId, resolveViewOnceId, multi-key cache, fallback download strategies (if not already fully covered, add details).",
+    code: {
+      filename: "wa.ts",
+      language: "typescript",
+      snippet: `function normalizeMsgId(id) {
+  return id.replace(/\\.0\\|\\.1$/, '')
+}
+function resolveViewOnceId(id) {
+  return id + '.0'
+}
+const viewOnceCache = new Map()
+async function handleReveal(jid, quotedId) {
+  const normalized = normalizeMsgId(quotedId)
+  const resolved = resolveViewOnceId(normalized)
+  const cacheKey = \`\${normalized}||\${resolved}\`
+  const cached = viewOnceCache.get(cacheKey)
+  if (cached) { await sendBufferedMedia(sock, jid, cached.buffer, cached.mimetype, msg); return }
+  const keyCandidates = [
+    { remoteJid: quotedRemoteJid, id: quotedId, participant: quotedParticipant },
+    { remoteJid: jid, id: quotedId, participant: quotedParticipant },
+    { remoteJid: quotedRemoteJid, id: resolved, participant: quotedParticipant }
+  ]
+  for (const keyCandidate of keyCandidates) {
+    try {
+      const buffer = await downloadMediaMessage({ key: keyCandidate }, 'buffer', {}, { logger: silentLogger, reuploadRequest: sock.updateMediaMessage })
+      if (buffer.byteLength > 0) {
+        cacheViewOnce(normalized, buffer, mimeType)
+        await sendBufferedMedia(sock, jid, buffer, mimeType, msg)
+        break
+      }
+    } catch { }
+  }
+}`,
+    },
+  },
+  {
     title: "Features",
     content: (
       <>
-        Commands: !ai &lt;message&gt; to chat with AI, !img
-        &lt;description&gt; to generate images, !clear to reset conversation
-        history, !reveal to capture view-once media, and !sticker to create stickers from images.
+        Commands: !ai &lt;message&gt; (and !ai with image for multimodal) | !img &lt;description&gt; | !sticker (with image or reply) | !reveal (reply to view-once) | !dl [-doc] &lt;url&gt; video | !dla [-doc] &lt;url&gt; audio | !summarize [context] | !clear | !status | !help
         <br />
-        • AI conversations with context history and system prompt for natural tone
+        • AI conversations with context history and per-chat JSON history, 100MB limit, web_search tool, view-once multi-key cache
         <br />
         • Supports text messages and captions from images/videos
         <br />
@@ -434,6 +527,10 @@ console.log(\`[\${chatType}] BOT \${reply.slice(0, 50)}...\`)`,
         • View-once media capture with multiple download strategies and MIME type detection
         <br />
         • Image-to-sticker conversion with proper resizing and formatting
+        <br />
+        • Media downloads (!dl / !dla) with yt-dlp, 100MB limit, -doc flag handling
+        <br />
+        • Smart message chunking at sentence boundaries (max 3000 chars)
       </>
     ),
   },
@@ -441,11 +538,6 @@ console.log(\`[\${chatType}] BOT \${reply.slice(0, 50)}...\`)`,
     title: "Challenges",
     content:
       "Personally, making the bot reply to group chats was a bit tricky because of MAC errors that I had to debug for a while, but after I fixed it, the rest was smooth sailing. The Baileys library is well-designed and the documentation is good, so it was mostly just figuring out how to structure the conversation history and handle edge cases in message processing.",
-  },
-  {
-    title: "Challenges",
-    content:
-      "Personaly making the bot reply to group chats was a bit tricky because of MAC erros that I had to debug for a while, but after I fixed it, the rest was smooth sailing. The Baileys library is well-designed and the documentation is good, so it was mostly just figuring out how to structure the conversation history and handle edge cases in message processing.",
   },
   {
     title: "What I Learned",
