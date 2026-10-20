@@ -49,6 +49,20 @@ const posts: Post[] = [
     excerpt: "Drawing shapes with your fingers using MediaPipe and OpenCV.",
     tags: ["python", "mediapipe", "opencv"],
   },
+  {
+    slug: "pacer",
+    title: "Pacer",
+    date: "2026-10-14",
+    excerpt: "A Flutter GPS run tracker on Supabase Postgres, with teams, challenges and a coach role.",
+    tags: ["flutter", "supabase", "postgres"],
+  },
+  {
+    slug: "seblak-demo",
+    title: "Seblak Mama Rizki",
+    date: "2026-10-04",
+    excerpt: "Rebuilding a real street-food stall's site in Next.js 16, static on Cloudflare Pages.",
+    tags: ["next.js", "tailwind", "cloudflare"],
+  },
 ]
 
 export default function Home() {

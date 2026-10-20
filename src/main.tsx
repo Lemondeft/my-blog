@@ -8,6 +8,8 @@ import Linux from './blog/linux.tsx'
 import Wabot from './blog/wabot.tsx'
 import AppleMusic from './blog/apple-music.tsx'
 import Handtrack from './blog/handtrack.tsx'
+import Pacer from './blog/pacer.tsx'
+import SeblakDemo from './blog/seblak-demo.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,6 +21,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/blog/wabot" element={<Wabot />} />
         <Route path="/blog/apple-music" element={<AppleMusic />} />
         <Route path="/blog/handtrack" element={<Handtrack />} />
+        <Route path="/blog/pacer" element={<Pacer />} />
+        <Route path="/blog/seblak-demo" element={<SeblakDemo />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
